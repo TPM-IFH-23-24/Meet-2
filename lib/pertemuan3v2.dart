@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pertemuan_2/navigation.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -25,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
               padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
               child: Column(
                 children: [
-                  FlutterLogo(size: 100,),
+                  FlutterLogo(size: 100),
                   _username(),
                   _password(),
                   _loginbutton(context)
@@ -53,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
                 borderSide: BorderSide(color: Colors.blue)
             ),
             enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.red)
+                borderSide: BorderSide(color: (isLogin) ? Colors.green : Colors.red)
             )
         ),
       ),
@@ -76,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                 borderSide: BorderSide(color: Colors.blue)
             ),
             enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.red)
+                borderSide: BorderSide(color: (isLogin) ? Colors.green : Colors.red)
             )
         ),
       ),
@@ -97,6 +98,9 @@ class _LoginPageState extends State<LoginPage> {
             setState((){
               text = 'Login Success';
               isLogin = true;
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+                return Navigation(message: username);
+              }));
             });
           }else{
             setState((){
